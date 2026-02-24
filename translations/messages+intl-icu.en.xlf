@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="en" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="vfxT6rr" resname="defaut.index.message_accueil">
+        <source>defaut.index.message_accueil</source>
+        <target>Here, nothing to sell, it's only for learning</target>
+      </trans-unit>
+      <trans-unit id="mbHDQuR" resname="default.contact.garder_contact">
+        <source>default.contact.garder_contact</source>
+        <target>Keep in touch</target>
+      </trans-unit>
+      <trans-unit id="fnqm4uE" resname="boutique.rayon.rayon">
+        <source>boutique.rayon.rayon</source>
+        <target>Aisle</target>
+      </trans-unit>
+      <trans-unit id="7XYYWGv" resname="boutique.rayon.produits_disponibles">
+        <source>boutique.rayon.produits_disponibles</source>
+        <target>Available Product(s)</target>
+      </trans-unit>
+      <trans-unit id="QrQ1zFZ" resname="boutique.index.rayons_proposes">
+        <source>boutique.index.rayons_proposes</source>
+        <target>Available Aisle(s)</target>
+      </trans-unit>
+      <trans-unit id="kuhtb5p" resname="navbar.boutique">
+        <source>navbar.boutique</source>
+        <target>Shop</target>
+      </trans-unit>
+      <trans-unit id="nCSBDIb" resname="navbar.contact">
+        <source>navbar.contact</source>
+        <target>Contact</target>
+      </trans-unit>
+      <trans-unit id="_AcwoR2" resname="default.index.accueil">
+        <source>default.index.accueil</source>
+        <target>Home</target>
+      </trans-unit>
+      <trans-unit id="UuGyePH" resname="default.index.titre">
+        <source>default.index.titre</source>
+        <target>R4.01 Shop - </target>
+      </trans-unit>
+      <trans-unit id="2lf8Iux" resname="boutique.recherche.recherche">
+        <source>boutique.recherche.recherche</source>
+        <target>Search : </target>
+      </trans-unit>
+      <trans-unit id="IvrLam3" resname="boutique.recherche.produits">
+        <source>boutique.recherche.produits</source>
+        <target>Product(s)</target>
+      </trans-unit>
+      <trans-unit id="SHq442S" resname="boutique.index.titre">
+        <source>boutique.index.titre</source>
+        <target>__boutique.index.titre</target>
+      </trans-unit>
+      <trans-unit id="4Vi3Wl0" resname="boutique.index.boutique">
+        <source>boutique.index.boutique</source>
+        <target>__boutique.index.boutique</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

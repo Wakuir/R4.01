@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recherche{% endblock %}
+
+{% block body %}
+    <div class="card col-md-12">
+        <div class="card-header">
+            <a class="btn-back text-secondary" href="{{ path("app_boutique_index") }}">
+                <i class="fas fa-2x fa-arrow-circle-left"></i>
+            </a>
+            <h3>
+                <i class="fas fa-store"></i>
+                {{ "boutique.recherche.recherche" | trans }} <b>{{ recherche }}</b>
+                <span class="badge badge-pill badge-info">{{ produits | length }}</span>
+                {{ "boutique.recherche.produits" | trans }}
+            </h3>
+        </div>
+        <div class="card-body row">
+            {% for produit in produits %}
+                <div class="col-md-4">
+                    <div class="card clickable" onclick="{# TODO #}"
+                         data-toggle="tooltip" title="" data-placement="bottom" data-html="true" data-container="body"
+                         data-original-title="Ajouter &lt;b&gt;{{ produit.libelle }}&lt;/b&gt; à mon panier">
+                        <img src="{{ asset(produit.visuel) }}" class="card-img-produit" alt="{{ produit.libelle }}">
+                        <div class="card-body">
+                            <h4 class="card-title">{{ produit.libelle }}</h4>
+                            <p class="card-text">
+                                <i>{{ produit.texte }}</i>
+                            </p>
+                            <h2>
+                                <span class="badge badge-primary">
+                                    <i class="fas fa-cart-plus"></i>&nbsp;&nbsp;
+                                    {{ produit.prix }}&nbsp;€
+                                </span>
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

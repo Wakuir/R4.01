@@ -19,13 +19,15 @@ class ProduitRepository extends ServiceEntityRepository
     /**
      * @return Produit[] Returns an array of Produit objects
      */
-    public function findByLibelleOrTexte(string $recherche): array {
-        return array_filter(
-            $this->findAll(),
-            function ($produit) use ($recherche) {
-                return ($recherche == "" ||
-                    mb_strpos(mb_strtolower($produit->getLibelle()) . " " . $produit->getTexte(), mb_strtolower($recherche)) !== false);
-            }
-        );
+    public function findByLibelleOrTexte(string $recherche): array
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT p
+            FROM App\Entity\Product p
+            WHERE p.libelle LIKE :recherche
+            OR p.texte LIKE :recherche')->setParameter('recherche', $recherche);
+        // On renvoie un tableau de Produits
+        return $query->getResult();
     }
 }

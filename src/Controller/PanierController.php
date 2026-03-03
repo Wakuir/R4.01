@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\ProduitRepository;
 use App\Service\PanierService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,11 +15,11 @@ class PanierController extends AbstractController
 {
 
     #[Route('/', name: 'app_panier_index')]
-    public function index(PanierService $panierService): Response
+    public function index(PanierService $panierService, ProduitRepository $prods): Response
     {
         return $this->render('panier/index.html.twig', [
-            'panier' => $panierService->getContenu(),
-            'montant' => $panierService->getTotal(),
+            'panier' => $panierService->getContenu($prods),
+            'montant' => $panierService->getTotal($prods),
         ]);
     }
 

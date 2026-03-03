@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Repository\CategorieRepository;
+use App\Repository\ProduitRepository;
 use App\Service\BoutiqueService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,20 +17,20 @@ use Symfony\Component\Routing\Attribute\Route;
 final class BoutiqueController extends AbstractController
 {
     #[Route('/', name: 'app_boutique_index')]
-    public function index(BoutiqueService $boutique): Response
+    public function index(CategorieRepository $cats): Response
     {
         return $this->render('boutique/index.html.twig', [
             'controller_name' => 'BoutiqueController',
-            'categories' => $boutique->findAllCategories()
+            'categories' => $cats->findAll()
         ]);
     }
 
     #[Route('/rayon/{idCategorie}', name: 'app_boutique_rayon')]
-    public function rayon(BoutiqueService $boutique, int $idCategorie): Response
+    public function rayon(CategorieRepository $cats, ProduitRepository $prods, int $idCategorie): Response
     {
         return $this->render("boutique/rayon.html.twig", [
-            'infoRayon' => $boutique->findCategorieById($idCategorie),
-            'produits' => $boutique->findProduitsByCategorie($idCategorie)
+            'infoRayon' => $prods->find($idCategorie),
+            'produits' => $cats->find($idCategorie)->getProduits()
         ]);
     }
 
@@ -36,11 +38,11 @@ final class BoutiqueController extends AbstractController
         name: 'app_boutique_chercher',
         requirements: ['recherche' => '.+'], // regexp pour avoir tous les car, / compris
         defaults: ['recherche' => ''])]
-    public function chercher(BoutiqueService $boutique, string $recherche): Response
+    public function chercher(ProduitRepository $prods, string $recherche): Response
     {
         return $this->render("boutique/chercher.html.twig", [
             "recherche" => $recherche,
-            "produits" => $boutique->findProduitsByLibelleOrTexte($recherche)
+            "produits" => $prods->findByLibelleOrTexte($recherche)
         ]);
     }
 }

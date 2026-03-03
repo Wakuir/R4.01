@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Repository\ProduitRepository;
 use Symfony\Component\HttpFoundation\RequestStack;
 use App\Service\BoutiqueService;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -11,29 +12,27 @@ class PanierService
 {
     ////////////////////////////////////////////////////////////////////////////
     private $session;   // Le service session
-    private $boutique;  // Le service boutique
     private $panier;    // Tableau associatif, la clé est un idProduit, la valeur associée est une quantité
     //   donc $this->panier[$idProduit] = quantité du produit dont l'id = $idProduit
     const PANIER_SESSION = 'panier'; // Le nom de la variable de session pour faire persister $this->panier
 
     // Constructeur du service
-    public function __construct(RequestStack $requestStack, BoutiqueService $boutique)
+    public function __construct(RequestStack $requestStack)
     {
-        // Récupération des services session et BoutiqueService
-        $this->boutique = $boutique;
+        // Récupération du service session
         $this->session = $requestStack->getSession();
         // Récupération du panier en session s'il existe, init. à vide sinon
         $this->panier = $this->session->get(self::PANIER_SESSION, []);
     }
 
     // Renvoie le montant total du panier
-    public function getTotal(): float
+    public function getTotal(ProduitRepository $prods): float
     {
         $total = 0.0;
         foreach ($this->panier as $idProduit => $quantite) {
-            $produit = $this->boutique->findProduitById($idProduit);
+            $produit = $prods->find($idProduit);
             if ($produit) {
-                $total += $produit->prix * $quantite;
+                $total += $produit->getPrix() * $quantite;
             }
         }
 
@@ -93,11 +92,11 @@ class PanierService
 
     // Renvoie le contenu du panier dans le but de l'afficher
     //   => un tableau d'éléments [ "produit" => un objet produit, "quantite" => sa quantite ]
-    public function getContenu(): array
+    public function getContenu(ProduitRepository $prods): array
     {
         $contenu = [];
         foreach ($this->panier as $idProduit => $quantite) {
-            $produit = $this->boutique->findProduitById($idProduit);
+            $produit = $prods->find($idProduit);
             if ($produit) {
                 $contenu[] = [
                     'produit' => $produit,

@@ -49,9 +49,11 @@
 				$('[data-toggle="tooltip"]').tooltip();
 			});
 
-            // TODO
             // Coder ici la fonction appelée lors de la recherche d'un produit
             function onSearchClick(searchString) {
+                let searchStringEncoded = encodeURIComponent(searchString);
+                let base = "{{ path('app_boutique_chercher') }}";
+                window.location.href = base + "/" + searchStringEncoded;
             }
 		</script>
 		<!-- debut du block js spécifique -->

@@ -2,10 +2,13 @@
 
 namespace App\Service;
 
+use App\Entity\Commande;
+use App\Entity\LigneCommande;
+use App\Entity\Usager;
 use App\Repository\ProduitRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Clock\DatePoint;
 use Symfony\Component\HttpFoundation\RequestStack;
-use App\Service\BoutiqueService;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 // Service pour manipuler le panier et le stocker en session
 class PanierService
@@ -106,6 +109,32 @@ class PanierService
         }
 
         return $contenu;
+    }
+
+    public function panierToCommande(Usager $usager, ProduitRepository $produits, EntityManagerInterface $entityManager) : Commande {
+        $commande = new Commande();
+        $commande->setUsager($usager);
+        $commande->setDateCreation(new DatePoint());
+        $commande->setValidation(false);
+
+        foreach ($this->panier as $prod => $qte) {
+            $ligne = new LigneCommande();
+
+            $produit = $produits->find($prod);
+            $ligne->setProduit($produit);
+            $ligne->setQuantite($qte);
+            $ligne->setPrix($produit->getPrix() * $qte);
+
+            $commande->addLigneCommande($ligne);
+            $entityManager->persist($ligne);
+        }
+
+        $this->vider();
+
+        $entityManager->persist($commande);
+        $entityManager->flush();
+
+        return $commande;
     }
 
 }

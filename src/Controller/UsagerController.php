@@ -19,7 +19,7 @@ final class UsagerController extends AbstractController
     public function index(UsagerRepository $usagerRepository): Response
     {
         return $this->render('usager/index.html.twig', [
-            'usager' => $usagerRepository->find(1),
+            'usager' => $usagerRepository->find(1)
         ]);
     }
 

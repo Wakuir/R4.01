@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Repository\ProduitRepository;
+use App\Repository\UsagerRepository;
 use App\Service\PanierService;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -48,6 +50,12 @@ class PanierController extends AbstractController
     public function vider(PanierService $panierService): Response {
         $panierService->vider();
         return $this->redirectToRoute('app_panier_index');
+    }
+
+    #[Route('/commander', name: 'app_panier_commander')]
+    public function commander(PanierService $panierService, UsagerRepository $usagers, ProduitRepository $produits, EntityManagerInterface $entityManager): Response {
+        $panierService->panierToCommande($usagers->find(1), $produits, $entityManager);
+        return $this->redirectToRoute('app_commande_index');
     }
 
     public function nombreProduits(PanierService $panier): Response {

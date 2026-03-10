@@ -51,11 +51,11 @@
       </trans-unit>
       <trans-unit id="SHq442S" resname="boutique.index.titre">
         <source>boutique.index.titre</source>
-        <target>__boutique.index.titre</target>
+        <target>Boutique</target>
       </trans-unit>
       <trans-unit id="4Vi3Wl0" resname="boutique.index.boutique">
         <source>boutique.index.boutique</source>
-        <target>__boutique.index.boutique</target>
+        <target>Boutique</target>
       </trans-unit>
     </body>
   </file>

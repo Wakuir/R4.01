@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Compte{% endblock %}
+
+{% block body %}
+    <h1>Mon compte</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% if usager %}
+            <tr>
+                <td>{{ usager.email }}</td>
+                <td>{{ usager.nom }}</td>
+                <td>{{ usager.prenom }}</td>
+                <td>
+                </td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

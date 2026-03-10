@@ -37,7 +37,7 @@
                         <img src="{{ asset(item.produit.visuel) }}" class="cart-img-produit" alt="{{ item.produit.libelle }}">
                     </td>
                     <td>
-                        <a href=" {# TODO #}">
+                        <a href="{{ path("app_boutique_rayon", {idCategorie: item.produit.getCategorie().getId()}) }}">
                             <b>{{ item.produit.libelle }}</b>
                         </a>
                     </td>
@@ -83,7 +83,6 @@
                 </tr>
                 </tfoot>
             </table>
-
         </div>
     </div>
 {% endblock %}

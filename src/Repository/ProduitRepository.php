@@ -24,9 +24,9 @@ class ProduitRepository extends ServiceEntityRepository
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery(
             'SELECT p
-            FROM App\Entity\Product p
+            FROM App\Entity\Produit p
             WHERE p.libelle LIKE :recherche
-            OR p.texte LIKE :recherche')->setParameter('recherche', $recherche);
+            OR p.texte LIKE :recherche')->setParameter('recherche', '%'.$recherche.'%');
         // On renvoie un tableau de Produits
         return $query->getResult();
     }

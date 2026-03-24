@@ -16,9 +16,11 @@
                 {{ montant | number_format(2, ",", " ") }}
             </h3>
             <div class="col-md-6 align-self-center btn-group btn-group" role="group">
+                {% if is_granted('ROLE_CLIENT') %}
                 <a class="btn btn-primary" href="{{ path("app_panier_commander") }}">
                     Passer la commande
                 </a>
+                {% endif %}
             </div>
 
         </div>

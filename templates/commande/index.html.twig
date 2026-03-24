@@ -27,7 +27,9 @@
                 {% for commande in commandes %}
                     <tr>
                         <td>
-                            {{ commande.id }}
+                            <a href="{{ path('app_commande_commande', {id: commande.id}) }}">
+                                {{ commande.id }}
+                            </a>
                         </td>
                         <td>
                             {{ commande.dateCreation | date("Y-m-d") }}

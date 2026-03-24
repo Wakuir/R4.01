@@ -11,6 +11,9 @@ security:
                 class: App\Entity\Usager
                 property: email
 
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_CLIENT
+
     firewalls:
         dev:
             # Ensure dev tools and static assets are always allowed
@@ -19,6 +22,14 @@ security:
         main:
             lazy: true
             provider: app_user_provider
+            form_login:
+                login_path: app_login
+                check_path: app_login
+                enable_csrf: true
+            logout:
+                path: app_logout
+                # where to redirect after logout
+                target: app_default_index
 
             # Activate different ways to authenticate:
             # https://symfony.com/doc/current/security.html#the-firewall
@@ -28,8 +39,9 @@ security:
 
     # Note: Only the *first* matching rule is applied
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+    - { path: ^/(%app.supported_locales%)/usager$, roles: ROLE_CLIENT }
+    - { path: ^/(%app.supported_locales%)/panier/commander, roles: ROLE_CLIENT }
+    - { path: ^/(%app.supported_locales%)/commande, roles: ROLE_CLIENT }
 
 when@test:
     security:

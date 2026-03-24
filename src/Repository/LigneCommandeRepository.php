@@ -40,4 +40,17 @@ class LigneCommandeRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function findTopNProduits(int $n) : array {
+        //'SELECT l.produit, sum(l.quantite) as tot from App\Entity\LigneCommande l group by l.produit order by tot limi $n'
+
+        return $this->createQueryBuilder('l')
+            ->select('p.libelle as libelle, p.visuel as visuel, sum(l.quantite) as total')
+            ->innerJoin('l.produit', 'p')
+            ->groupBy('l.produit')
+            ->orderBy('total', 'DESC')
+            ->setMaxResults($n)
+            ->getQuery()
+            ->getArrayResult();
+    }
 }

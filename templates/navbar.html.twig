@@ -42,13 +42,21 @@
                     Usager
                 </span>
                 <div class="dropdown-menu" style="min-width: 5rem;">
+                    {% set logged = is_granted('ROLE_CLIENT') %}
                     <a class="dropdown-item" href="{{ path("app_usager_new") }}">
                         Inscription
                     </a>
-                </div>
-                <div class="dropdown-menu" style="min-width: 5rem;">
-                    <a class="dropdown-item" href="{{ path("app_usager_index") }}">
-                        Accueil
+                    <a class="dropdown-item" href="{{ path("app_login") }}">
+                        Connexion
+                    </a>
+                    <a class="dropdown-item {{ not logged ? 'disabled' : '' }}" href="{{ path("app_commande_index") }}">
+                        Mes Commandes
+                    </a>
+                    <a class="dropdown-item {{ not logged ? 'disabled' : '' }}" href="{{ path("app_usager_index") }}">
+                        Mon Compte
+                    </a>
+                    <a class="dropdown-item {{ not logged ? 'disabled' : '' }}" href="{{ path("app_logout") }}">
+                        Déconnexion
                     </a>
                 </div>
             </li>

@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Usager;
+use Gregwar\CaptchaBundle\Type\CaptchaType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,6 +17,7 @@ class UsagerType extends AbstractType
             ->add('password')
             ->add('nom')
             ->add('prenom')
+            ->add('captcha', CaptchaType::class)
         ;
     }
 

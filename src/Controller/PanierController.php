@@ -54,8 +54,9 @@ class PanierController extends AbstractController
 
     #[Route('/commander', name: 'app_panier_commander')]
     public function commander(PanierService $panierService, UsagerRepository $usagers, ProduitRepository $produits, EntityManagerInterface $entityManager): Response {
-        $panierService->panierToCommande($usagers->find(1), $produits, $entityManager);
-        return $this->redirectToRoute('app_commande_index');
+        $usager = $this->getUser();
+        $commande = $panierService->panierToCommande($usager, $produits, $entityManager);
+        return $this->redirectToRoute('app_commande_commande', ['id' => $commande->getId()]);
     }
 
     public function nombreProduits(PanierService $panier): Response {

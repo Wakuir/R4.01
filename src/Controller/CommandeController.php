@@ -22,6 +22,6 @@ class CommandeController extends AbstractController
     public function commande(CommandeRepository $commandes, int $id) : Response {
         $usager = $this->getUser();
         $commande = $commandes->find($id);
-        return $this->render('commande/commande.html.twig', ['prenom' => $usager->getPrenom(), 'nom' => $usager->getNom(), 'date' => $commande->getDateCreation(), 'numCommande' => $commande->getId(), 'articles' => $commande->getLigneCommandes()]);
+        return $this->render('commande/commande.html.twig', ['prenom' => $usager->getPrenom(), 'nom' => $usager->getNom(), 'date' => $commande->getDateCreation(), 'numCommande' => $commande->getId(), 'articles' => $commande->getLigneCommandes(), 'total' => $commande->getTotal()]);
     }
 }
